@@ -121,6 +121,61 @@ function LineItemArray() {
         name="lineItemTotal"
         type="number"
       />
+
+      <hr />
+
+      {/* Shipping */}
+      <div className="space-y-6">
+        <h2 className="font-semibold text-lg">Shipping</h2>
+        <div className="hidden">
+          <InputText
+            label="Customer Pickup"
+            id="customerPickup"
+            value={false}
+          />
+        </div>
+        <div className="grid grid-cols-6 gap-3">
+          <div className="col-span-6">
+            <InputText label="Name / Attention" id="attentionTo" />
+          </div>
+          <div className="col-span-6">
+            <InputText label="Company" id="companyName" />
+          </div>
+          <div className="col-span-6">
+            <InputText label="Address 1" id="address1" />
+          </div>
+          <div className="col-span-6">
+            <InputText label="Address 2" id="address2" />
+          </div>
+          <div className="col-span-6">
+            <InputText label="City" id="city" />
+          </div>
+          <div className="col-span-6 sm:col-span-2">
+            <InputText label="State / Region" id="region" />
+          </div>
+          <div className="col-span-6 sm:col-span-2">
+            <InputText label="Zip / Postal Code" id="postalCode" />
+          </div>
+          <div className="col-span-6 sm:col-span-2">
+            <InputSelectCountry />
+          </div>
+          <div className="col-span-6 sm:col-span-3">
+            <InputText label="Email" id="email" type="email" />
+          </div>
+          <div className="col-span-6 sm:col-span-3">
+            <InputText label="Phone" id="phone" />
+          </div>
+        </div>
+      </div>
     </>
+  );
+}
+
+function InputSelectCountry() {
+  return (
+    <InputSelect label="Country" id="country" defaultValue="US">
+      <option value="US">United States</option>
+      <option value="CA">Canada</option>
+    </InputSelect>
   );
 }
