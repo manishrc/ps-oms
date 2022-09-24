@@ -158,7 +158,7 @@ function LineItemArray() {
             <InputText label="Zip / Postal Code" id="postalCode" />
           </div>
           <div className="col-span-6 sm:col-span-2">
-            <InputSelectCountry />
+            <InputSelectCountry label="Country" id="country" name="country" />
           </div>
           <div className="col-span-6 sm:col-span-3">
             <InputText label="Email" id="email" type="email" />
@@ -168,6 +168,24 @@ function LineItemArray() {
           </div>
         </div>
       </div>
+
+      <FreightDetails />
     </>
+  );
+}
+
+function FreightDetails() {
+  return (
+    <div>
+      <label for="carrier">Freight</label>
+      <div className="flex">
+        <InputSelect id="carrier" endEdge defaultValue="UPS">
+          <option value="UPS">UPS</option>
+          <option value="USPS">USPS</option>
+          <option value="FEDEX">FedEx</option>
+        </InputSelect>
+        <InputText id="service" placeholder="Eg. GROUND, 2DAY" startEdge />
+      </div>
+    </div>
   );
 }
