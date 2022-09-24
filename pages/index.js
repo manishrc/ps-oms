@@ -5,6 +5,7 @@ import {
   InputText,
   InputSelect,
   InputDate,
+  InputSelectCountry,
 } from "@/components/input";
 import { HiArchive } from "react-icons/hi";
 
@@ -168,14 +169,5 @@ function LineItemArray() {
         </div>
       </div>
     </>
-  );
-}
-
-function InputSelectCountry() {
-  return (
-    <InputSelect label="Country" id="country" defaultValue="US">
-      <option value="US">United States</option>
-      <option value="CA">Canada</option>
-    </InputSelect>
   );
 }
