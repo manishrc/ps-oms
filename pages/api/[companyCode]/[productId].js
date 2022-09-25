@@ -29,5 +29,10 @@ export default async function handler(req, res) {
     localizationLanguage: "en",
   });
 
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=600, stale-while-revalidate=3600",
+  );
+
   res.status(200).json(psResponse);
 }
