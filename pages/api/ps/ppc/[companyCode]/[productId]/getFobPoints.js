@@ -7,13 +7,15 @@ export default async function handler(req, res) {
 
   const psClient = new PromoStandards.Client(psConfig);
 
-  const psResponse = await psClient.productPricingAndConfiguration.getFobPoints(
-    {
+  const fobId = (
+    await psClient.productPricingAndConfiguration.getFobPoints({
       productId,
       localizationCountry: "US",
       localizationLanguage: "en",
-    }
-  );
+    })
+  )?.["Envelope"]?.["Body"]?.["GetFobPointsResponse"]?.["FobPointArray"]?.[0]?.[
+    "fobId"
+  ];
 
   res.setHeader(
     "Cache-Control",

@@ -7,11 +7,21 @@ export default async function handler(req, res) {
 
   const psClient = new PromoStandards.Client(psConfig);
 
+  const fobId = (
+    await psClient.productPricingAndConfiguration.getFobPoints({
+      productId,
+      localizationCountry: "US",
+      localizationLanguage: "en",
+    })
+  )?.["Envelope"]?.["Body"]?.["GetFobPointsResponse"]?.["FobPointArray"]?.[0]?.[
+    "fobId"
+  ];
+
   const psResponse =
     await psClient.productPricingAndConfiguration.getConfigurationAndPricing({
       productId,
       currency: "USD",
-      fobId: "15068",
+      fobId,
       priceType: "Net",
       configurationType: "Decorated",
       localizationCountry: "US",
