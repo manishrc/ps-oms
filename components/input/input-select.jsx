@@ -1,3 +1,5 @@
+import classNames from "@/lib/classnames";
+
 export default function InputSelect({
   label,
   id,
@@ -28,11 +30,13 @@ export default function InputSelect({
         )}
         <select
           id={id}
-          className={`block w-full rounded-md border-gray-300 shadow-sm sm:text-sm ${
-            startEdge ? "rounded-l-none" : ""
-          } ${endEdge ? "rounded-r-none" : ""} ${startIcon ? "pl-10" : ""} ${
+          className={classNames(
+            "block w-full rounded-md border-gray-300 shadow-sm sm:text-sm",
+            startEdge ? "rounded-l-none" : "",
+            endEdge ? "rounded-r-none" : "",
+            startIcon ? "pl-10" : "",
             endIcon ? "pr-10" : ""
-          }`}
+          )}
           {...rest}
         >
           {children}
