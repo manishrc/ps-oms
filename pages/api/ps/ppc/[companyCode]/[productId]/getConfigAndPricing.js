@@ -20,8 +20,9 @@ export default async function handler(req, res) {
 
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=600, stale-while-revalidate=3600",
+    "public, s-maxage=600, stale-while-revalidate=3600"
   );
+  res.setHeader("Content-Type", "application/json");
 
   res.status(200).json(psResponse);
 }

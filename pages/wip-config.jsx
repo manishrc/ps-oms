@@ -19,7 +19,7 @@ export default function ProductConfig({ productData }) {
 }
 export async function getStaticProps() {
   const res = await fetch(
-    `https://ps-oms.vercel.app/api/ps/get-product/$PCNA/1601-91`
+    `https://ps-oms.vercel.app/api/ps/ppc/PCNA/1601-91/getConfigAndPricing`
   );
   const data = await res.json();
   const productData =
