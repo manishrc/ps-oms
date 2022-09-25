@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
-import classNames from "@/lib/classname";
+import classNames from "@/lib/classnames";
 // Use this compoent using RHF's controlled component
 
 /**
