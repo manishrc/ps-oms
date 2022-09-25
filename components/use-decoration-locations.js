@@ -7,6 +7,8 @@ export default function useDecorationLocations({ companyCode, productId }) {
     return res.json();
   });
 
+  // Can have duplicates.
+  // @todo: Remove duplicates by locationName
   const locations =
     data?.["Envelope"]?.["Body"]?.["GetConfigurationAndPricingResponse"]?.[
       "Configuration"
