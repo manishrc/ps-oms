@@ -13,7 +13,7 @@ export default function InputSelect({
   return (
     <div>
       {!!label && (
-        <label className="font-medium text-gray-700" for={id}>
+        <label className="font-medium text-gray-700" htmlFor={id}>
           {label}
         </label>
       )}
