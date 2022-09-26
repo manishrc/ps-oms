@@ -203,11 +203,23 @@ export default function ProductConfiguration({ productData }) {
       },
     })
       .then(function (response) {
-        console.log(response);
         return response.text();
       })
-      .then(function (data) {
-        console.log(data);
+      .then(function (text) {
+        console.log(text);
+        const element = document.createElement("a");
+        element.setAttribute(
+          "href",
+          "data:text/xml;charset=utf-8," + encodeURIComponent(text),
+        );
+        element.setAttribute("download", poRequestBody.orderNumber + ".xml");
+        element.style.display = "none";
+
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
       })
       .catch((error) => console.error("Error:", error));
   };
