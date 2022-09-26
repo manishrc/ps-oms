@@ -6,6 +6,7 @@ import {
   HiOutlineMinus as MinusIcon,
   HiOutlinePlus as PlusIcon,
 } from "react-icons/hi";
+import ProductConfiguration from "@/components/product-configuration";
 const HOST = process.env.VERCEL_URL;
 
 const product = {
@@ -89,7 +90,7 @@ export default function Example({ productData }) {
                         <span
                           className={classNames(
                             selected ? "ring-blue-500" : "ring-transparent",
-                            "pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2"
+                            "pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2",
                           )}
                           aria-hidden="true"
                         />
@@ -138,7 +139,7 @@ export default function Example({ productData }) {
                         product.rating > rating
                           ? "text-blue-500"
                           : "text-gray-300",
-                        "h-5 w-5 flex-shrink-0"
+                        "h-5 w-5 flex-shrink-0",
                       )}
                       aria-hidden="true"
                     />
@@ -181,7 +182,7 @@ export default function Example({ productData }) {
                             color.selectedColor,
                             active && checked ? "ring ring-offset-1" : "",
                             !active && checked ? "ring-2" : "",
-                            "-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none"
+                            "-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none",
                           )
                         }
                       >
@@ -193,7 +194,7 @@ export default function Example({ productData }) {
                           aria-hidden="true"
                           className={classNames(
                             color.bgColor,
-                            "h-8 w-8 border border-black border-opacity-10 rounded-full"
+                            "h-8 w-8 border border-black border-opacity-10 rounded-full",
                           )}
                         />
                       </RadioGroup.Option>
@@ -238,7 +239,7 @@ export default function Example({ productData }) {
                             <span
                               className={classNames(
                                 open ? "text-blue-600" : "text-gray-900",
-                                "text-sm font-medium"
+                                "text-sm font-medium",
                               )}
                             >
                               {detail.name}
@@ -274,6 +275,8 @@ export default function Example({ productData }) {
                 ))}
               </div>
             </section>
+
+            <ProductConfiguration productData={productData} />
           </div>
         </div>
       </div>
@@ -285,7 +288,7 @@ export async function getStaticProps(context) {
   const { companyCode, productId } = context.params;
   console.log({ HOST });
   const res = await fetch(
-    `https://ps-oms.vercel.app/api/ps/get-product/${companyCode}/${productId}`
+    `https://ps-oms.vercel.app/api/ps/get-product/${companyCode}/${productId}`,
   );
   const data = await res.json();
   const productData =
