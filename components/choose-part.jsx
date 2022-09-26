@@ -42,7 +42,6 @@ export default function ProductOptions({ productData, onChange }) {
         colorArrayToColor(part.ColorArray) === selectedColor,
     )?.partId;
     onChange?.(partId);
-    console.log("partId", partId);
   }, [onChange, productData, selectedColor, selectedSize]);
 
   return (

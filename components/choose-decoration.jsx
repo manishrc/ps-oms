@@ -10,14 +10,16 @@ import classNames from "@/lib/classnames";
 import useShipping from "@/components/use-shipping";
 
 // Soft-goods suppliers like SanMar/Alpha might not have Decoration options
-export default function ChooseDecoration({ onChange }) {
+export default function ChooseDecoration({ onChange, productId, companyCode }) {
   const { locations = [] } = useDecorationLocations({
     // companyCode: "HIT",
     // productId: "5790",
     // companyCode: "PCNA",
     // productId: "1601-91",
-    companyCode: "PCNA",
-    productId: "1921-09",
+    // companyCode: "PCNA",
+    // productId: "1921-09",
+    companyCode,
+    productId,
   });
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedDecoration, setSelectedDecoration] = useState("");
@@ -35,7 +37,7 @@ export default function ChooseDecoration({ onChange }) {
 
   const getDeocationsForLocation = (locationId) => {
     const location = locations.find(
-      (location) => location.locationId == locationId
+      (location) => location.locationId == locationId,
     );
     return location?.DecorationArray || [];
   };
@@ -80,7 +82,7 @@ function ChooseMethod({ decorations, onChange }) {
   return (
     <RadioGroup value={selectedDecorationMethod} onChange={handleChange}>
       <RadioGroup.Label className="text-lg font-medium text-gray-900">
-        Delivery method
+        Decoration method
       </RadioGroup.Label>
 
       <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
@@ -92,7 +94,7 @@ function ChooseMethod({ decorations, onChange }) {
               classNames(
                 checked ? "border-transparent" : "border-gray-300",
                 active ? "ring-2 ring-blue-500" : "",
-                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
+                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
               )
             }
           >
@@ -135,7 +137,7 @@ function ChooseMethod({ decorations, onChange }) {
                   className={classNames(
                     active ? "border" : "border-2",
                     checked ? "border-blue-500" : "border-transparent",
-                    "pointer-events-none absolute -inset-px rounded-lg"
+                    "pointer-events-none absolute -inset-px rounded-lg",
                   )}
                   aria-hidden="true"
                 />
