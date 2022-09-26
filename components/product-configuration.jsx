@@ -6,7 +6,8 @@ import ChooseDecorationMethod from "@/components/choose-decoration-method";
 import ChooseArtwork from "@/components/choose-artwork";
 import { InputAddress } from "@/components/input";
 import ChooseShipping from "@/components/choose-shipping";
-import EditAddress from "./edit-address";
+import EditAddress from "@/components/edit-address";
+import ChooseQuantity from "@/components/choose-quantity";
 
 export default function ProductConfiguration({ productData }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -26,6 +27,11 @@ export default function ProductConfiguration({ productData }) {
           console.log("partId", partId);
           setPartId(partId);
         }}
+      />
+      <ChooseQuantity
+        productId={query.productId}
+        companyCode={query.companyCode}
+        partId={partId}
       />
       <ChooseDecorationLocation
         productId={query.productId}
