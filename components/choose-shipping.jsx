@@ -31,7 +31,7 @@ export default function ChooseShipping({ onChange, shipToAddress }) {
 
   return (
     <RadioGroup value={selectedDeliveryMethod} onChange={handleChange}>
-      <RadioGroup.Label className="text-lg font-medium text-gray-900">
+      <RadioGroup.Label className="font-medium text-gray-700 text-base">
         Delivery method
       </RadioGroup.Label>
 
@@ -44,7 +44,7 @@ export default function ChooseShipping({ onChange, shipToAddress }) {
               classNames(
                 checked ? "border-transparent" : "border-gray-300",
                 active ? "ring-2 ring-blue-500" : "",
-                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
+                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
               )
             }
           >
@@ -58,18 +58,20 @@ export default function ChooseShipping({ onChange, shipToAddress }) {
                     >
                       {deliveryMethod.serviceType}
                     </RadioGroup.Label>
-                    <RadioGroup.Description
-                      as="span"
-                      className="mt-1 flex items-center text-sm text-gray-500"
-                    >
-                      {deliveryMethod.deliveryDays} day(s)
-                    </RadioGroup.Description>
-                    <RadioGroup.Description
-                      as="span"
-                      className="mt-6 text-sm font-medium text-gray-900"
-                    >
-                      ${deliveryMethod.price}
-                    </RadioGroup.Description>
+                    <span className="flex justify-between flex-col flex-1">
+                      <RadioGroup.Description
+                        as="span"
+                        className="mt-1 flex items-center text-sm text-gray-500"
+                      >
+                        {deliveryMethod.deliveryDays} day(s)
+                      </RadioGroup.Description>
+                      <RadioGroup.Description
+                        as="span"
+                        className="mt-6 text-sm font-medium text-gray-900"
+                      >
+                        ${deliveryMethod.price}
+                      </RadioGroup.Description>
+                    </span>
                   </span>
                 </span>
                 {checked ? (
@@ -82,7 +84,7 @@ export default function ChooseShipping({ onChange, shipToAddress }) {
                   className={classNames(
                     active ? "border" : "border-2",
                     checked ? "border-blue-500" : "border-transparent",
-                    "pointer-events-none absolute -inset-px rounded-lg",
+                    "pointer-events-none absolute -inset-px rounded-lg"
                   )}
                   aria-hidden="true"
                 />
