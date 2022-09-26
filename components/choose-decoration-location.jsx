@@ -40,6 +40,8 @@ export default function ChooseDecorationLocation({
     onChange?.(location);
   };
 
+  if (locations.length === 0) return null;
+
   return (
     <div className="space-y-6">
       <RadioGroup value={selectedLocation} onChange={handleLocationChange}>

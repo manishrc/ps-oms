@@ -54,6 +54,8 @@ export default function ChooseDecorationMethod({ decorations = [], onChange }) {
     );
   };
 
+  if (decorations?.length === 0) return null;
+
   return (
     <RadioGroup value={selectedDecorationMethod} onChange={handleChange}>
       <RadioGroup.Label className="font-medium text-gray-700 text-base">
