@@ -6,6 +6,7 @@ import ChooseDecorationMethod from "@/components/choose-decoration-method";
 import ChooseArtwork from "@/components/choose-artwork";
 import { InputAddress } from "@/components/input";
 import ChooseShipping from "@/components/choose-shipping";
+import EditAddress from "./edit-address";
 
 export default function ProductConfiguration({ productData }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -50,7 +51,7 @@ export default function ProductConfiguration({ productData }) {
           setArtworkFile(artworkFile);
         }}
       />
-      <InputAddress
+      <EditAddress
         onChange={(address) => {
           console.log({ address });
           setAddress(address);
