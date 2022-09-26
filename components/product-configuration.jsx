@@ -19,6 +19,199 @@ export default function ProductConfiguration({ productData }) {
   const [shippingMethod, setShippingMethod] = useState();
   const { query } = useRouter();
 
+  const submitPO = () => {
+    const poRequestBody = {
+      orderType: "Simple",
+      orderNumber: `PHO-${Math.floor(Math.random() * 100000)}`,
+      orderDate: new Date().toISOString(),
+      totalAmount: "20",
+      rush: false,
+      currency: "USD",
+      shipments: [
+        {
+          customerPickup: false,
+          shipTo: {
+            shipmentId: `PHS-${Math.floor(Math.random() * 100000)}`,
+            ...address,
+          },
+          packingListRequired: false,
+          blindShip: false,
+          allowConsolidation: true,
+          freightDetails: {
+            carrier: shippingMethod.carrier,
+            service: shippingMethod.serviceCode,
+          },
+        },
+      ],
+      lineItems: [
+        {
+          lineNumber: 1,
+          description: "NA",
+          lineType: "New",
+          lineItemTotal: 20.2,
+          quantity: {
+            value: 1,
+            uom: "EA",
+          },
+          toleranceDetails: {
+            tolerance: "ExactOnly",
+          },
+          allowPartialShipments: false,
+          parts: [
+            {
+              partId,
+              customerSupplied: false,
+              quantity: {
+                value: 1,
+                uom: "EA",
+              },
+            },
+          ],
+          // configuration: {
+          //   locations: [
+          //     {
+          //       locationLinkId: `PHLL-${Math.floor(Math.random() * 100000)}`,
+          //       locationId: decorationLocation.locationId,
+          //       locationName: decorationLocation.locationName,
+          //       DecorationArray: [
+          //         {
+          //           decorationId: "",
+          //           decorationName: decorationMethod.decorationName,
+          //           artWork: {
+          //             artworkFiles: [
+          //               {
+          //                 fileName: artworkFile.name,
+          //                 fileLocation: artworkFile.url,
+          //                 transportMechanism: "Url",
+          //                 artworkType: "ProductionReady",
+          //               },
+          //             ],
+          //           },
+          //         },
+          //       ],
+          //     },
+          //   ],
+          // },
+        },
+      ],
+      termsAndConditions: "Pricing per AIM",
+    };
+    console.log({
+      poRequestBody,
+    });
+    fetch(`/api/ps/po/${encodeURIComponent(query.companyCode)}`, {
+      method: "POST",
+      body: JSON.stringify(poRequestBody),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  const downloadPO = () => {
+    const poRequestBody = {
+      orderType: "Simple",
+      orderNumber: `PHO-${Math.floor(Math.random() * 100000)}`,
+      orderDate: new Date().toISOString(),
+      totalAmount: "20",
+      rush: false,
+      currency: "USD",
+      shipments: [
+        {
+          customerPickup: false,
+          shipTo: {
+            shipmentId: `PHS-${Math.floor(Math.random() * 100000)}`,
+            ...address,
+          },
+          packingListRequired: false,
+          blindShip: false,
+          allowConsolidation: true,
+          freightDetails: {
+            carrier: shippingMethod.carrier,
+            service: shippingMethod.serviceCode,
+          },
+        },
+      ],
+      lineItems: [
+        {
+          lineNumber: 1,
+          description: "NA",
+          lineType: "New",
+          lineItemTotal: 20.2,
+          quantity: {
+            value: 1,
+            uom: "EA",
+          },
+          toleranceDetails: {
+            tolerance: "ExactOnly",
+          },
+          allowPartialShipments: false,
+          parts: [
+            {
+              partId,
+              customerSupplied: false,
+              quantity: {
+                value: 1,
+                uom: "EA",
+              },
+            },
+          ],
+          // configuration: {
+          //   locations: [
+          //     {
+          //       locationLinkId: `PHLL-${Math.floor(Math.random() * 100000)}`,
+          //       locationId: decorationLocation.locationId,
+          //       locationName: decorationLocation.locationName,
+          //       DecorationArray: [
+          //         {
+          //           decorationId: "",
+          //           decorationName: decorationMethod.decorationName,
+          //           artWork: {
+          //             artworkFiles: [
+          //               {
+          //                 fileName: artworkFile.name,
+          //                 fileLocation: artworkFile.url,
+          //                 transportMechanism: "Url",
+          //                 artworkType: "ProductionReady",
+          //               },
+          //             ],
+          //           },
+          //         },
+          //       ],
+          //     },
+          //   ],
+          // },
+        },
+      ],
+      termsAndConditions: "Pricing per AIM",
+    };
+    console.log({
+      poRequestBody,
+    });
+    fetch(`/api/ps/po/${encodeURIComponent(query.companyCode)}/download`, {
+      method: "POST",
+      body: JSON.stringify(poRequestBody),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then(function (response) {
+        console.log(response);
+        return response.text();
+      })
+      .then(function (data) {
+        console.log(data);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
   return (
     <div className="space-y-12">
       <ChoosePart
@@ -67,11 +260,13 @@ export default function ProductConfiguration({ productData }) {
         <ChooseShipping
           shipToAddress={address}
           onChange={(shippingMethod) => {
-            console.log("shipping", shippingMethod);
+            console.log("shippingMethod", shippingMethod);
             setShippingMethod(shippingMethod);
           }}
         />
       )}
+      <button onClick={submitPO}>Submit PO</button>
+      <button onClick={downloadPO}>Download</button>
     </div>
   );
 }
