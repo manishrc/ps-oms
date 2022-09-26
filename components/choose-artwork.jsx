@@ -97,8 +97,8 @@ export default function ChooseArtwork({ minWidth, minHeight, onChange }) {
             effects={["crop", "rotate", "invert"]}
             publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY}
             id="file"
-            validators={[() => {}]}
-            previewStep="true"
+            // validators={[() => {}]}
+            // previewStep="true"
             imagesOnly={true}
             // onFileSelect={(file) => {
             //   if (file) {
