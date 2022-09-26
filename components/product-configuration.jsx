@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ProductOptions from "@/components/product-options";
+import ProductOptions from "@/components/choose-part";
 
 export default function ProductConfiguration({ productData }) {
   const [currentStep, setCurrentStep] = useState(0);
