@@ -265,8 +265,20 @@ export default function ProductConfiguration({ productData }) {
           }}
         />
       )}
-      <button onClick={submitPO}>Submit PO</button>
-      <button onClick={downloadPO}>Download</button>
+      <div>
+        <button
+          className="mt-3 flex w-full flex-1 items-center justify-center rounded-md border border-blue-700 bg-blue-600 py-3 px-8 text-base font-medium text-white  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full hover:text-white hover:border-transparent"
+          onClick={submitPO}
+        >
+          Submit PO
+        </button>
+        <button
+          className="mt-3 flex w-full flex-1 items-center justify-center rounded-md border border-gray-300 bg-white py-3 px-8 text-base font-medium text-gray-700 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full hover:text-white hover:border-transparent"
+          onClick={downloadPO}
+        >
+          Download e-PO for Email
+        </button>
+      </div>
     </div>
   );
 }
