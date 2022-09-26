@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.uploadcare--widget__button,
+.uploadcare--button_primary {
+  @apply bg-blue-600;
+}
