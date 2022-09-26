@@ -111,6 +111,11 @@ export default function ProductConfiguration({ productData }) {
       })
       .then(function (data) {
         console.log(data);
+        const transactionId =
+          data?.Envelope?.Body?.SendPOResponse?.transactionId;
+        if (transactionId) {
+          alert("Successfully sent PO. Transaction ID: " + transactionId);
+        }
       })
       .catch((error) => console.error("Error:", error));
   };
