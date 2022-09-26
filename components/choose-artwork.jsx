@@ -63,26 +63,27 @@ export default function ChooseArtwork({ minWidth, minHeight, onChange }) {
             Enter your artwork dimentions (Max: {minWidth} x {minHeight} inch):
           </p>
           <InputText
-            placeholder="Height"
-            type="number"
-            step="0.01"
-            defaultValue={minHeight}
-            max={minHeight}
-            endIcon={<span>Inch</span>}
-            onChange={(e) => {
-              setSelectedHeight(e.target.value);
-            }}
-          />
-
-          <InputText
             placeholder="Width"
             type="number"
             step="0.01"
             defaultValue={minWidth}
             max={minWidth}
-            endIcon={<span>Inch</span>}
+            endIcon={<span className="text-xs text-gray-500">Inch</span>}
+            startIcon={<span className="text-xs text-gray-500">W</span>}
             onChange={(e) => {
               setSelectedWidth(e.target.value);
+            }}
+          />
+          <InputText
+            placeholder="Height"
+            type="number"
+            step="0.01"
+            defaultValue={minHeight}
+            max={minHeight}
+            endIcon={<span className="text-xs text-gray-500">Inch</span>}
+            startIcon={<span className="text-xs text-gray-500">H</span>}
+            onChange={(e) => {
+              setSelectedHeight(e.target.value);
             }}
           />
         </div>
