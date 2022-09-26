@@ -17,7 +17,7 @@ const debugPaylog = {
 
 export default function useShipping(paylod = debugPaylog) {
   const { data, error } = useSWR(
-    "/api/shipping/estimate",
+    ["/api/shipping/estimate", paylod],
     async function fetcher(url) {
       const res = await fetch(url, {
         method: "POST",
@@ -27,20 +27,21 @@ export default function useShipping(paylod = debugPaylog) {
         body: JSON.stringify(paylod),
       });
       return res.json();
-    }
+    },
   );
 
   const options = data
+    ?.filter((option) => option.error_messages.length === 0)
     ?.map((option) => ({
       carrier: option.carrier_friendly_name,
       serviceType: option.service_type,
       serviceCode: option.service_code,
-      price: option.shipping_amount.amount,
+      price: option.shipping_amount?.amount,
       deliveryDays: option.delivery_days,
     }))
     ?.sort((a, b) => a.price - b.price);
 
-  console.table(options);
+  // console.table(options);
 
   return {
     options: options,

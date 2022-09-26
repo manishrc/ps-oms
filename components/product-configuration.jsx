@@ -5,6 +5,7 @@ import ChooseDecorationLocation from "@/components/choose-decoration-location";
 import ChooseDecorationMethod from "@/components/choose-decoration-method";
 import ChooseArtwork from "@/components/choose-artwork";
 import { InputAddress } from "@/components/input";
+import ChooseShipping from "@/components/choose-shipping";
 
 export default function ProductConfiguration({ productData }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -13,6 +14,7 @@ export default function ProductConfiguration({ productData }) {
   const [decorationMethod, setDecorationMethod] = useState();
   const [artworkFile, setArtworkFile] = useState();
   const [address, setAddress] = useState();
+  const [shippingMethod, setShippingMethod] = useState();
   const { query } = useRouter();
 
   return (
@@ -54,6 +56,15 @@ export default function ProductConfiguration({ productData }) {
           setAddress(address);
         }}
       />
+      {address && (
+        <ChooseShipping
+          shipToAddress={address}
+          onChange={(shippingMethod) => {
+            console.log("shipping", shippingMethod);
+            setShippingMethod(shippingMethod);
+          }}
+        />
+      )}
     </div>
   );
 }

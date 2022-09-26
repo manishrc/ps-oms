@@ -7,14 +7,26 @@ import {
 import classNames from "@/lib/classnames";
 import useShipping from "@/components/use-shipping";
 
-export default function ChooseShipping({ onChange }) {
+export default function ChooseShipping({ onChange, shipToAddress }) {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(null);
-  const { options = [], isLoading } = useShipping();
+  const { options = [], isLoading } = useShipping({
+    ship_to: {
+      city_locality: shipToAddress?.city,
+      state_province: shipToAddress?.region,
+      postal_code: shipToAddress?.postalCode,
+      country_code: shipToAddress?.country,
+    },
+    ship_from: {
+      city_locality: "Austin",
+      state_province: "TX",
+      postal_code: "78756",
+      country_code: "US",
+    },
+  });
 
-  const handleChange = (e) => {
-    console.log(e);
-    onChange?.(e);
-    setSelectedDeliveryMethod(e);
+  const handleChange = (serviceCode) => {
+    onChange?.(options.find((option) => option.serviceCode === serviceCode));
+    setSelectedDeliveryMethod(serviceCode);
   };
 
   return (
@@ -32,7 +44,7 @@ export default function ChooseShipping({ onChange }) {
               classNames(
                 checked ? "border-transparent" : "border-gray-300",
                 active ? "ring-2 ring-blue-500" : "",
-                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
+                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
               )
             }
           >
@@ -70,7 +82,7 @@ export default function ChooseShipping({ onChange }) {
                   className={classNames(
                     active ? "border" : "border-2",
                     checked ? "border-blue-500" : "border-transparent",
-                    "pointer-events-none absolute -inset-px rounded-lg"
+                    "pointer-events-none absolute -inset-px rounded-lg",
                   )}
                   aria-hidden="true"
                 />
