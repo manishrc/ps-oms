@@ -1,9 +1,10 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import ChoosePart from "@/components/choose-part";
 import ChooseDecorationLocation from "@/components/choose-decoration-location";
 import ChooseDecorationMethod from "@/components/choose-decoration-method";
-import ChooseArtwork from "./choose-artwork";
-import { useRouter } from "next/router";
+import ChooseArtwork from "@/components/choose-artwork";
+import { InputAddress } from "@/components/input";
 
 export default function ProductConfiguration({ productData }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -11,6 +12,7 @@ export default function ProductConfiguration({ productData }) {
   const [decorationLocation, setDecorationLocation] = useState();
   const [decorationMethod, setDecorationMethod] = useState();
   const [artworkFile, setArtworkFile] = useState();
+  const [address, setAddress] = useState();
   const { query } = useRouter();
 
   return (
@@ -44,6 +46,12 @@ export default function ProductConfiguration({ productData }) {
         onChange={(artworkFile) => {
           console.log("artworkFile", artworkFile);
           setArtworkFile(artworkFile);
+        }}
+      />
+      <InputAddress
+        onChange={(address) => {
+          console.log({ address });
+          setAddress(address);
         }}
       />
     </div>
