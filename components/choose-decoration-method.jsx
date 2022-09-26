@@ -9,76 +9,51 @@ import {
 import classNames from "@/lib/classnames";
 import useShipping from "@/components/use-shipping";
 
-// Soft-goods suppliers like SanMar/Alpha might not have Decoration options
-export default function ChooseDecoration({ onChange, productId, companyCode }) {
-  const { locations = [] } = useDecorationLocations({
-    // companyCode: "HIT",
-    // productId: "5790",
-    // companyCode: "PCNA",
-    // productId: "1601-91",
-    // companyCode: "PCNA",
-    // productId: "1921-09",
-    companyCode,
-    productId,
-  });
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedDecoration, setSelectedDecoration] = useState("");
+// // Soft-goods suppliers like SanMar/Alpha might not have Decoration options
+// export default function ChooseDecorationMethod({ onChange, decorations }) {
+//   const [selectedDecoration, setSelectedDecoration] = useState("");
 
-  const handleLocationChange = (event) => {
-    setSelectedLocation(event.target.value);
-    setSelectedDecoration(""); // Reset decoration when location changes
-    onChange?.();
-  };
+//   const handleMethodChange = (event) => {
+//     setSelectedDecoration(event.target.value);
+//     onChange?.();
+//   };
 
-  const handleMethodChange = (event) => {
-    setSelectedDecoration(event.target.value);
-    onChange?.();
-  };
+//   return (
+//     <div className="space-y-6">
+//       <div>
+//         <InputSelect
+//           id="decoration-location"
+//           onChange={handleLocationChange}
+//           label="Decoration Location"
+//           value={selectedLocation}
+//         >
+//           <option value="">Select a location</option>
+//           {locations
+//             .sort((a, b) => a.locationRank - b.locationRank)
+//             .map((location) => (
+//               <option key={location.locationId} value={location.locationId}>
+//                 {location.locationName}
+//               </option>
+//             ))}
+//         </InputSelect>
+//       </div>
 
-  const getDeocationsForLocation = (locationId) => {
-    const location = locations.find(
-      (location) => location.locationId == locationId,
-    );
-    return location?.DecorationArray || [];
-  };
+//       <ChooseMethod decorations={decorations} />
+//     </div>
+//   );
+// }
 
-  const decorations = getDeocationsForLocation(selectedLocation);
-
-  return (
-    <div className="space-y-6">
-      <div>
-        <InputSelect
-          id="decoration-location"
-          onChange={handleLocationChange}
-          label="Decoration Location"
-          value={selectedLocation}
-        >
-          <option value="">Select a location</option>
-          {locations
-            .sort((a, b) => a.locationRank - b.locationRank)
-            .map((location) => (
-              <option key={location.locationId} value={location.locationId}>
-                {location.locationName}
-              </option>
-            ))}
-        </InputSelect>
-      </div>
-
-      <ChooseMethod decorations={decorations} />
-    </div>
-  );
-}
-
-function ChooseMethod({ decorations, onChange }) {
+export default function ChooseDecorationMethod({ decorations = [], onChange }) {
   const [selectedDecorationMethod, setSelectedDecorationMethod] =
     useState(null);
 
-  const handleChange = (e) => {
-    onChange?.(e);
-    setSelectedDecorationMethod(e);
+  const handleChange = (value) => {
+    setSelectedDecorationMethod(value);
+    onChange?.(
+      decorations.find((decoration) => decoration.decorationId === value),
+    );
   };
 
-  console.log({ decorations });
   return (
     <RadioGroup value={selectedDecorationMethod} onChange={handleChange}>
       <RadioGroup.Label className="text-lg font-medium text-gray-900">
