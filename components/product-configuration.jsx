@@ -2,6 +2,7 @@ import { useState } from "react";
 import ChoosePart from "@/components/choose-part";
 import ChooseDecorationLocation from "@/components/choose-decoration-location";
 import ChooseDecorationMethod from "@/components/choose-decoration-method";
+import ChooseArtwork from "./choose-artwork";
 import { useRouter } from "next/router";
 
 export default function ProductConfiguration({ productData }) {
@@ -9,6 +10,7 @@ export default function ProductConfiguration({ productData }) {
   const [partId, setPartId] = useState();
   const [decorationLocation, setDecorationLocation] = useState();
   const [decorationMethod, setDecorationMethod] = useState();
+  const [artworkFile, setArtworkFile] = useState();
   const { query } = useRouter();
 
   return (
@@ -16,8 +18,8 @@ export default function ProductConfiguration({ productData }) {
       <ChoosePart
         productData={productData}
         onChange={(partId) => {
-          setPartId(partId);
           console.log("partId", partId);
+          setPartId(partId);
         }}
       />
       <ChooseDecorationLocation
@@ -25,15 +27,23 @@ export default function ProductConfiguration({ productData }) {
         companyCode={query.companyCode}
         partId={partId}
         onChange={(decorationLocation) => {
-          setDecorationLocation(decorationLocation);
           console.log("decorationLocation", decorationLocation);
+          setDecorationLocation(decorationLocation);
         }}
       />
       <ChooseDecorationMethod
         decorations={decorationLocation?.DecorationArray}
         onChange={(decorationLocationMethod) => {
+          console.log("decorationLocationMethod", decorationLocationMethod);
           setDecorationMethod(decorationLocationMethod);
-          console.log("decorationMethod", decorationMethod);
+        }}
+      />
+      <ChooseArtwork
+        minHeight={decorationMethod?.decorationHeight}
+        minWidth={decorationMethod?.decorationWidth}
+        onChange={(artworkFile) => {
+          console.log("artworkFile", artworkFile);
+          setArtworkFile(artworkFile);
         }}
       />
     </div>

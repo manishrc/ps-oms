@@ -10,7 +10,7 @@ import {
 
 const MIN_DPI = 300;
 
-const hasMinDPI = (physicalHight, physicalWidth, uom = "inch") => {
+const hasMinDPI = (physicalWidth, physicalHight, uom = "inch") => {
   return function (fileInfo) {
     // Intermedia validations lack this info - until upload is complete
     const originalImageInfo = fileInfo.originalImageInfo || {};
@@ -23,7 +23,7 @@ const hasMinDPI = (physicalHight, physicalWidth, uom = "inch") => {
   };
 };
 
-export default function ChooseArtwork({ currentAvatar, onChange }) {
+export default function ChooseArtwork({ minWidth, minHeight, onChange }) {
   const [imageValidation, setImageValidation] = useState({});
   const [file, setFile] = useState(null);
 
@@ -36,7 +36,7 @@ export default function ChooseArtwork({ currentAvatar, onChange }) {
   };
   const handleFileProgress = (fileInfo) => {};
   const handleUploadFinish = (fileInfo) => {
-    hasMinDPI(1, 1)(fileInfo)
+    hasMinDPI(minWidth, minHeight)(fileInfo)
       ? setImageValidation({
           type: "success",
           text: "Image size looks good.",
@@ -71,7 +71,7 @@ export default function ChooseArtwork({ currentAvatar, onChange }) {
           imageValidation.type === "success"
             ? "text-green-500"
             : "text-amber-500",
-          "text-sm flex items-center"
+          "text-sm flex items-center",
         )}
       >
         {imageValidation.type === "success" && (
