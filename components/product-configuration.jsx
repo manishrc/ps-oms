@@ -16,7 +16,7 @@ export default function ProductConfiguration({ productData }) {
   const { query } = useRouter();
 
   return (
-    <div>
+    <div className="space-y-6">
       <ChoosePart
         productData={productData}
         onChange={(partId) => {

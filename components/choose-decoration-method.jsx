@@ -50,17 +50,17 @@ export default function ChooseDecorationMethod({ decorations = [], onChange }) {
   const handleChange = (value) => {
     setSelectedDecorationMethod(value);
     onChange?.(
-      decorations.find((decoration) => decoration.decorationId === value),
+      decorations.find((decoration) => decoration.decorationId === value)
     );
   };
 
   return (
     <RadioGroup value={selectedDecorationMethod} onChange={handleChange}>
-      <RadioGroup.Label className="text-lg font-medium text-gray-900">
+      <RadioGroup.Label className="font-medium text-gray-700 text-base">
         Decoration method
       </RadioGroup.Label>
 
-      <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+      <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
         {decorations.map((decorationMethod) => (
           <RadioGroup.Option
             key={decorationMethod.decorationId}
@@ -69,14 +69,14 @@ export default function ChooseDecorationMethod({ decorations = [], onChange }) {
               classNames(
                 checked ? "border-transparent" : "border-gray-300",
                 active ? "ring-2 ring-blue-500" : "",
-                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
+                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
               )
             }
           >
             {({ checked, active }) => (
               <>
-                <span className="flex flex-1">
-                  <span className="flex flex-col">
+                <span className="flex flex-1 pr-6">
+                  <span className="flex flex-col justify-between">
                     <RadioGroup.Label
                       as="span"
                       className="block text-sm font-medium text-gray-900"
@@ -104,7 +104,7 @@ export default function ChooseDecorationMethod({ decorations = [], onChange }) {
                 </span>
                 {checked ? (
                   <CheckCircleIcon
-                    className="h-5 w-5 text-blue-600"
+                    className="absolute top-4 right-4 h-5 w-5 text-blue-600"
                     aria-hidden="true"
                   />
                 ) : null}
@@ -112,7 +112,7 @@ export default function ChooseDecorationMethod({ decorations = [], onChange }) {
                   className={classNames(
                     active ? "border" : "border-2",
                     checked ? "border-blue-500" : "border-transparent",
-                    "pointer-events-none absolute -inset-px rounded-lg",
+                    "pointer-events-none absolute -inset-px rounded-lg"
                   )}
                   aria-hidden="true"
                 />
